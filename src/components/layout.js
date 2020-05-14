@@ -7,10 +7,29 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import Uikit from "uikit"
 
 import Header from "./header"
-import "./layout.css"
+import "./layout.scss"
+
+const Navigation = ({ location }) => {
+  return (
+    <nav
+      className="uk-navbar-container"
+      data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top; bottom: #bottom"
+      data-uk-navbar
+    >
+      <div className="uk-navbar-center">
+        <ul className="uk-navbar-nav">
+          <li>
+            <Link to="/page-2">page-2</Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  )
+}
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,6 +45,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
+      <Navigation />
       <div
         style={{
           margin: `0 auto`,
